@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      9120-All-Natural-Plain-Bagel_0: -4518228461991987231
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
