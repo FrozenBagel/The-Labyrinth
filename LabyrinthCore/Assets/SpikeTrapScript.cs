@@ -9,7 +9,7 @@ public class Spike : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("ayo");
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)

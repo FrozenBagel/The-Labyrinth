@@ -5,32 +5,40 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 100f; 
+    public float maxHealth = 100f;
     private float currentHealth;
 
-    public Slider healthSlider; // Reference to the UI slider for the health bar
-    public Gradient healthGradient; // Gradient to define the color shift for the health bar
+    public Slider healthSlider; 
+    public Gradient healthGradient;
+    public GameObject healthBar;
+    public MonoBehaviour movement;
+
+
+    public ParticleSystem bloodParticles;
 
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthUI(); 
+        UpdateHealthUI();
     }
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage; 
+        currentHealth -= damage;
         UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
             Die();
         }
+
+        EmitBloodParticles();
     }
 
     void Die()
     {
-        Debug.Log("Player has died!");
+        Destroy(healthBar);
+        movement.enabled = false;
     }
 
     void UpdateHealthUI()
@@ -38,5 +46,11 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.value = currentHealth / maxHealth;
 
         healthSlider.fillRect.GetComponent<Image>().color = healthGradient.Evaluate(healthSlider.normalizedValue);
+    }
+
+    void EmitBloodParticles()
+    {
+        bloodParticles.transform.position = transform.position;
+        bloodParticles.Play();
     }
 }
